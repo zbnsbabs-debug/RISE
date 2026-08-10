@@ -1,17 +1,23 @@
 package com.rise.app
 
+import android.app.Activity
 import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.compose.material3.Text
+import android.graphics.Color
+import android.widget.TextView
 
-class MainActivity : ComponentActivity() {
+class MainActivity : Activity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setContent {
-            Text("RISE")
+        val text = TextView(this).apply {
+            text = "RISE"
+            textSize = 32f
+            setTextColor(Color.WHITE)
+            setBackgroundColor(Color.BLACK)
+            gravity = android.view.Gravity.CENTER
         }
+
+        setContentView(text)
     }
 }
