@@ -1,10 +1,10 @@
 name: Build RISE APK
 
 on:
-  workflow_dispatch:
   push:
     branches:
       - main
+  workflow_dispatch:
 
 jobs:
   build:
@@ -13,12 +13,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
-      - name: Extract RISE project
-        run: |
-          unzip -o RISE_v1_build_FINAL.zip
-          ls -la RISE_v1
-          ls -la RISE_v1/app
 
       - name: Set up Java
         uses: actions/setup-java@v4
@@ -32,11 +26,10 @@ jobs:
           gradle-version: '8.7'
 
       - name: Build APK
-        working-directory: RISE_v1
         run: gradle assembleDebug
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: RISE-APK
-          path: RISE_v1/app/build/outputs/apk/debug/app-debug.apk
+          path: app/build/outputs/apk/debug/*.apk
